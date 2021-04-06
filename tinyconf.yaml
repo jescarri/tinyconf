@@ -1,0 +1,33 @@
+install_pkgs:
+- name: apache2
+  version: 2.4.41-4ubuntu3.1
+- name: php
+  version: '2:7.4+75'
+- name: libapache2-mod-php
+  version: '2:7.4+75'
+- name: minicom
+  version: 2.7.1-1.1
+remove_pkgs:
+- name: minicom
+  version: 2.7.1-1.1
+files:
+- name: /var/www/html/index.php
+  gid: 33
+  uid: 33
+  mode: 0600
+  content: |+
+    <?php
+      header("Content-Type: text/plain");
+      echo "Hello, world!\n";
+    ?>
+- name: /etc/apache2/mods-available/dir.conf
+  gid: 0
+  uid: 0
+  mode: 0644
+  content: |+
+    <IfModule mod_dir.c>
+      DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+    </IfModule>
+  service: apache2
+onboot_svcs:
+- apache2

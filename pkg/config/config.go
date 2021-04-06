@@ -11,7 +11,7 @@ type Config struct {
 	InstallPkgs []apt.AptPkg `yaml:"install_pkgs"`
 	RemovePkgs  []apt.AptPkg `yaml:"remove_pkgs"`
 	Files       []file.File  `yaml:"files"`
-	OnBootSvcs  []string     `yaml:"onbootSvcs"`
+	OnBootSvcs  []string     `yaml:"onboot_svcs"`
 }
 
 func LoadConfig(file string) (*Config, error) {
