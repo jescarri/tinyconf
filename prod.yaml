@@ -1,0 +1,28 @@
+install_pkgs:
+- name: apache2
+  version: 2.4.29-1ubuntu4.14
+- name: php
+  version: '1:7.2+60ubuntu1'
+- name: libapache2-mod-php
+  version: '1:7.2+60ubuntu1'
+files:
+- name: /var/www/html/index.php
+  gid: 33
+  uid: 33
+  mode: 0600
+  content: |+
+    <?php
+      header("Content-Type: text/plain");
+      echo "Hello, world!\n";
+    ?>
+- name: /etc/apache2/mods-available/dir.conf
+  gid: 0
+  uid: 0
+  mode: 0644
+  content: |+
+    <IfModule mod_dir.c>
+      DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+    </IfModule>
+  service: apache2
+onboot_svcs:
+- apache2
